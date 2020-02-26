@@ -1,6 +1,7 @@
 ## contrail-web-controller
 ---
 
+
 ## Contrail Web Controller
 ---
 This software is licensed under the Apache License, Version 2.0 (the "License"); you may not use this software except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
@@ -17,6 +18,9 @@ The contrail web controller component requests data to the webserver which intur
 
 ### Directory structure
 ---
+
+
+
 **webroot** - Root directory for the files used in Dashboard, Configuration, Monitoring, Reporting features available through Contrail Web UI. The webroot directory internally has the following directories.
 
 **config** &nbsp;&nbsp;&nbsp;&nbsp;- Directory contains javascript files, view files used in `Configure` tab of Contrail Web UI. This directory also contains code used for unit testing the configuration features.
