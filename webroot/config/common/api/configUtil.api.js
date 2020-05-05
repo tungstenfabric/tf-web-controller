@@ -657,7 +657,7 @@ function getConfigUUIDList (req, res, appData)
     var resultJSON = [];
     type = type + 's';
 
-    var configUrl = '/' + type + '?parent_id=' + parentUUID;
+    var configUrl = '/' + type + (parentUUID ? '?parent_id=' + parentUUID : '');
     configApiServer.apiGet(configUrl, appData, function(err, configData) {
         if ((null != err) || (null == configData) ||
             (null == configData[type])) {
