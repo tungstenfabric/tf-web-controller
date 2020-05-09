@@ -341,12 +341,17 @@ function getConfigDetailsAsync (dataObj, callback)
         }
         var dataObjArr = [];
         for (var key in uuidObjs) {
-            var reqUrl = "/" + key + "s?detail=true&obj_uuids=" +
-                uuidObjs[key].join(",");
-            commonUtils.createReqObj(dataObjArr, reqUrl, null, null, null, null,
-                                     appData);
+            var groupSize = 150;
+            var totalObjToRetrieve = uuidObjs[key].length;
+            var uuidGroups = totalObjToRetrieve > groupSize ? _.chunk(totalObjToRetrieve, groupSize) : [uuidObjs[key]];
+
+            uuidGroups.forEach(function (uuids) {
+                var reqUrl = "/" + key + "s?detail=true&obj_uuids=" + uuids.join(",");
+                commonUtils.createReqObj(dataObjArr, reqUrl, null, null, null, null,
+                                        appData);
+            });
         }
-        async.map(dataObjArr,
+        async.mapLimit(dataObjArr, 5,
                   commonUtils.getServerResponseByRestApi(configApiServer, true),
                   function (error, fieldData) {
             var len = fieldData.length;
