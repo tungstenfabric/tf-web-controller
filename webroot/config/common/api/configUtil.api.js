@@ -341,10 +341,14 @@ function getConfigDetailsAsync (dataObj, callback)
         }
         var dataObjArr = [];
         for (var key in uuidObjs) {
-            var reqUrl = "/" + key + "s?detail=true&obj_uuids=" +
-                uuidObjs[key].join(",");
-            commonUtils.createReqObj(dataObjArr, reqUrl, null, null, null, null,
-                                     appData);
+            var totalObjToRetrieve = uuidObjs[key].length;
+            var uuidGroups = _.chunk(totalObjToRetrieve, 150);
+
+            uuidGroups.forEach((uuids) => {
+                var reqUrl = "/" + key + "s?detail=true&obj_uuids=" + uuids.join(",");
+                commonUtils.createReqObj(dataObjArr, reqUrl, null, null, null, null,
+                                        appData);
+            });
         }
         async.map(dataObjArr,
                   commonUtils.getServerResponseByRestApi(configApiServer, true),
