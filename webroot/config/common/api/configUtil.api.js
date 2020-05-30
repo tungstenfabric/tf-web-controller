@@ -343,7 +343,7 @@ function getConfigDetailsAsync (dataObj, callback)
         for (var key in uuidObjs) {
             var groupSize = 150;
             var totalObjToRetrieve = uuidObjs[key].length;
-            var uuidGroups = totalObjToRetrieve > groupSize ? _.chunk(totalObjToRetrieve, groupSize) : [uuidObjs[key]];
+            var uuidGroups = totalObjToRetrieve > groupSize ? _.chunk(uuidObjs[key], groupSize) : [uuidObjs[key]];
 
             uuidGroups.forEach(function (uuids) {
                 var reqUrl = "/" + key + "s?detail=true&obj_uuids=" + uuids.join(",");
