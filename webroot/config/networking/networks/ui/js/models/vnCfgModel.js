@@ -731,6 +731,9 @@ define([
                 } else if(!dnsServers.length && subnet.user_created_enable_dns){
                     this.setDHCPOptionList(subnet, []);
                 } else if (!(subnet.user_created_enable_dns)) {
+                    if(subnet.default_gateway) {
+                        disabledDNS[0].dhcp_option_value = subnet.default_gateway;
+                    }
                     this.setDHCPOptionList(subnet, disabledDNS);
                 }
                 if (hostRoutes.length) {
@@ -742,7 +745,9 @@ define([
                     }
                 }
                 if (subnet.user_created_enable_gateway == false) {
-                    subnet.default_gateway = '0.0.0.0';
+                    if(!subnet.default_gateway) {
+                        subnet.default_gateway = '0.0.0.0';
+                    }
                 } else if (subnet.default_gateway == null) {
                     var defGw = genarateGateway(subnet.user_created_cidr, "start");
                     //funny api
