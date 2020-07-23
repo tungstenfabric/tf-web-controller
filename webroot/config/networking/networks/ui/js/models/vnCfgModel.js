@@ -720,7 +720,7 @@ define([
                 subnetArray = [], ipamAssocArr = {}, dhcpOption;
             var dnsServers = this.getSubnetDNS(attr);
             var hostRoutes = this.getHostRouteList(attr);
-            var disabledDNS = [{'dhcp_option_name': '6', 'dhcp_option_value' : '0.0.0.0'}];
+
             for(var i = 0; i < subnetCollection.length; i++) {
                 var subnet = $.extend(true, {}, subnetCollection[i].model().attributes);
                 if(subnet['dns_server_address'] === null){
@@ -731,6 +731,7 @@ define([
                 } else if(!dnsServers.length && subnet.user_created_enable_dns){
                     this.setDHCPOptionList(subnet, []);
                 } else if (!(subnet.user_created_enable_dns)) {
+                    var disabledDNS = [{'dhcp_option_name': '6', 'dhcp_option_value' : '0.0.0.0'}];
                     if(subnet.default_gateway) {
                         disabledDNS[0].dhcp_option_value = subnet.default_gateway;
                     }
