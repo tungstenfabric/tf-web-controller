@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "964d56e3_11dc209a",
+        "filename": "webroot/config/networking/networks/ui/js/models/vnCfgModel.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 735,
+      "author": {
+        "id": 650
+      },
+      "writtenOn": "2020-07-23T09:38:55Z",
+      "side": 1,
+      "message": "Here you are mutating the original default object that is initialized outside of the loop.\nThis will cause other rows to be affected.\nEither recreate *disabledDNS* object on each pass or inject this value in another way.",
+      "revId": "f1b09b8fae35bac79281925a11d1c8eeb47aa900",
+      "serverId": "c72cd27d-1743-4a55-84a4-cd13b8400c52",
+      "unresolved": true
+    }
+  ]
+}
