@@ -58,7 +58,9 @@ define([
         //Grid column label: Fixed IP//
         self.fixedIPFormater = function(d, c, v, cd, dc) {
             var instanceIP = "";
-            var instIP = getValueByJsonPath(dc, "instance_ip_back_refs", []);
+            var instIP = getValueByJsonPath(dc, "instance_ip_back_refs", []).filter((ipRef) => {
+                return getValueByJsonPath(ipRef, "fixedip;userVisible", "");
+            });
             if(instIP.length > 0) {
                 var instIP_length = instIP.length;
                 for(var i = 0; i < instIP_length && i < 2 ;i++) {
@@ -159,7 +161,9 @@ define([
         //Grid column expand label: Fixed IPs//
         self.fixedIPFormaterExpand = function(d, c, v, cd, dc) {
             var instanceIP = "";
-            var instIP = getValueByJsonPath(dc, "instance_ip_back_refs", []);
+            var instIP = getValueByJsonPath(dc, "instance_ip_back_refs", []).filter((ipRef) => {
+                return getValueByJsonPath(ipRef, "fixedip;userVisible", "");
+            });
             if(instIP.length > 0) {
                 var vmi_length = instIP.length;
                 for(var i = 0; i < vmi_length; i++) {
