@@ -622,7 +622,24 @@ define([
 
             subnetCollection.remove(subnet);
         },
-
+        updateDefaultGateway: function (subnet, text = true) {
+            if(!text){
+                text = subnet.user_created_cidr();
+            }
+            var cidr = genarateGateway(text, "start");
+            if(cidr){ // If valid
+                // For IPV6
+                if(cidr.split(':').length >= 2) {
+                    subnet.default_gateway('::');
+                } else {
+                    // For IPV4
+                    subnet.default_gateway('0.0.0.0');
+                }
+            } else {
+                // If invalid or Empty
+                subnet.default_gateway('');
+            }
+        },
         setSubnetGateway: function (self, model, text) {
             var subnets = self.model().attributes['network_ipam_refs'].toJSON();
             var cid = model.cid;
@@ -634,7 +651,7 @@ define([
                     var gw = genarateGateway(text, "start");
                     gw != false ? subnet.default_gateway(gw) : subnet.default_gateway('');
                 } else {
-                    subnet.default_gateway('0.0.0.0');
+                    self.updateDefaultGateway(subnet, text);
                 }
                 return true;
             });
@@ -654,7 +671,7 @@ define([
                     }
                     gw != false ? subnet.default_gateway(gw) : subnet.default_gateway('');
                 } else {
-                    subnet.default_gateway('0.0.0.0');
+                    self.updateDefaultGateway(subnet, text);
                 }
                 return true;
             });
@@ -720,6 +737,7 @@ define([
                 subnetArray = [], ipamAssocArr = {}, dhcpOption;
             var dnsServers = this.getSubnetDNS(attr);
             var hostRoutes = this.getHostRouteList(attr);
+            var disabledDNS = [{'dhcp_option_name': '6', 'dhcp_option_value' : '0.0.0.0'}];
 
             for(var i = 0; i < subnetCollection.length; i++) {
                 var subnet = $.extend(true, {}, subnetCollection[i].model().attributes);
@@ -745,9 +763,10 @@ define([
                          subnet['host_routes']['route'] = hostRoutes;
                     }
                 }
+                var cidr = subnet.user_created_cidr;
                 if (subnet.user_created_enable_gateway == false) {
                     if(!subnet.default_gateway) {
-                        subnet.default_gateway = '0.0.0.0';
+                        self.updateDefaultGateway(subnet, false);
                     }
                 } else if (subnet.default_gateway == null) {
                     var defGw = genarateGateway(subnet.user_created_cidr, "start");
@@ -756,7 +775,6 @@ define([
                         subnet.default_gateway = defGw;
                     }
                 }
-                var cidr = subnet.user_created_cidr;
                 if (subnet.subnet.ip_prefix == null && cidr != null &&
                         cidr.split("/").length == 2) {
                     subnet.subnet.ip_prefix = cidr.split('/')[0];
