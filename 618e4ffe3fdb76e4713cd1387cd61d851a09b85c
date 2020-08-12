@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae464b25_6175c22b",
+        "filename": "webroot/config/networking/networks/ui/js/models/vnCfgModel.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 743,
+      "author": {
+        "id": 302
+      },
+      "writtenOn": "2020-08-12T17:43:12Z",
+      "side": 1,
+      "message": "Is this change documented/described in the ticket?",
+      "revId": "618e4ffe3fdb76e4713cd1387cd61d851a09b85c",
+      "serverId": "c72cd27d-1743-4a55-84a4-cd13b8400c52",
+      "unresolved": true
+    }
+  ]
+}
