@@ -654,7 +654,16 @@ define([
                     }
                     gw != false ? subnet.default_gateway(gw) : subnet.default_gateway('');
                 } else {
-                    subnet.default_gateway('0.0.0.0');
+                    var cidr = subnet.user_created_cidr();
+                    if (cidr) {
+                        if(cidr.split(':').length >= 2) {
+                            // When CIDR is IPV6
+                            subnet.default_gateway('::')
+                        } else {
+                            // When CIDR is IPV4
+                            subnet.default_gateway('0.0.0.0');
+                        }
+                    }
                 }
                 return true;
             });
@@ -720,6 +729,7 @@ define([
                 subnetArray = [], ipamAssocArr = {}, dhcpOption;
             var dnsServers = this.getSubnetDNS(attr);
             var hostRoutes = this.getHostRouteList(attr);
+            var disabledDNS = [{'dhcp_option_name': '6', 'dhcp_option_value' : '0.0.0.0'}];
 
             for(var i = 0; i < subnetCollection.length; i++) {
                 var subnet = $.extend(true, {}, subnetCollection[i].model().attributes);
@@ -731,11 +741,10 @@ define([
                 } else if(!dnsServers.length && subnet.user_created_enable_dns){
                     this.setDHCPOptionList(subnet, []);
                 } else if (!(subnet.user_created_enable_dns)) {
-                    var disabledDNS = [{'dhcp_option_name': '6', 'dhcp_option_value' : '0.0.0.0'}];
-                    if(subnet.default_gateway) {
-                        disabledDNS[0].dhcp_option_value = subnet.default_gateway;
+                    //Add DHCP option list only when it is enabled
+                    if(subnet.enable_dhcp) {
+                        this.setDHCPOptionList(subnet, disabledDNS);
                     }
-                    this.setDHCPOptionList(subnet, disabledDNS);
                 }
                 if (hostRoutes.length) {
                     if (typeof subnet.host_routes == "function") {
@@ -745,9 +754,14 @@ define([
                          subnet['host_routes']['route'] = hostRoutes;
                     }
                 }
+                var cidr = subnet.user_created_cidr;
                 if (subnet.user_created_enable_gateway == false) {
                     if(!subnet.default_gateway) {
-                        subnet.default_gateway = '0.0.0.0';
+                        if(cidr && cidr.split(':').length >= 2){
+                            subnet.default_gateway = '::';
+                        } else {
+                            subnet.default_gateway = '0.0.0.0';
+                        }
                     }
                 } else if (subnet.default_gateway == null) {
                     var defGw = genarateGateway(subnet.user_created_cidr, "start");
@@ -756,7 +770,6 @@ define([
                         subnet.default_gateway = defGw;
                     }
                 }
-                var cidr = subnet.user_created_cidr;
                 if (subnet.subnet.ip_prefix == null && cidr != null &&
                         cidr.split("/").length == 2) {
                     subnet.subnet.ip_prefix = cidr.split('/')[0];
