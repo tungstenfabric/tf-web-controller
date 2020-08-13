@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e7bb1b77_ad84ed06",
+        "filename": "webroot/config/networking/networks/ui/js/models/vnCfgModel.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 302
+      },
+      "writtenOn": "2020-08-13T15:24:20Z",
+      "side": 1,
+      "message": "this changes the original logic (setting default gateway no matter if user created cidr is set.\n\nIs this intended?",
+      "revId": "5c91fea03ca305db2b836545cc0ebbc35d088b9b",
+      "serverId": "c72cd27d-1743-4a55-84a4-cd13b8400c52",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ccd6abc1_44aabc93",
+        "filename": "webroot/config/networking/networks/ui/js/models/vnCfgModel.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 744,
+      "author": {
+        "id": 302
+      },
+      "writtenOn": "2020-08-13T15:24:20Z",
+      "side": 1,
+      "message": "Are these changes documented somewhere in the ticket?\n* when default subnet gateway is set, use it in the DHCP dropdown\n* no DHCP option list population unless DHCP is enabled",
+      "revId": "5c91fea03ca305db2b836545cc0ebbc35d088b9b",
+      "serverId": "c72cd27d-1743-4a55-84a4-cd13b8400c52",
+      "unresolved": true
+    }
+  ]
+}
