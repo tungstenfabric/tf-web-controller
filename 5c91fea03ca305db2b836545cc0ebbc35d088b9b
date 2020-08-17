@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7c0eb298_e289d7d6",
+        "filename": "webroot/config/networking/networks/ui/js/models/vnCfgModel.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 997
+      },
+      "writtenOn": "2020-08-17T16:03:37Z",
+      "side": 1,
+      "message": "Its intended, i can still add one empty string for default gateway in top level else condition if CIDR is not set. Ideally unless CIDR is set, we cannot proceed in saving the form and hence it wont add any value is what i feel.",
+      "parentUuid": "e7bb1b77_ad84ed06",
+      "revId": "5c91fea03ca305db2b836545cc0ebbc35d088b9b",
+      "serverId": "c72cd27d-1743-4a55-84a4-cd13b8400c52",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ccd6abc1_44aabc93",
         "filename": "webroot/config/networking/networks/ui/js/models/vnCfgModel.js",
         "patchSetId": 7
@@ -30,6 +48,24 @@
       "writtenOn": "2020-08-13T15:24:20Z",
       "side": 1,
       "message": "Are these changes documented somewhere in the ticket?\n* when default subnet gateway is set, use it in the DHCP dropdown\n* no DHCP option list population unless DHCP is enabled",
+      "revId": "5c91fea03ca305db2b836545cc0ebbc35d088b9b",
+      "serverId": "c72cd27d-1743-4a55-84a4-cd13b8400c52",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ac13053_16b37e28",
+        "filename": "webroot/config/networking/networks/ui/js/models/vnCfgModel.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 744,
+      "author": {
+        "id": 997
+      },
+      "writtenOn": "2020-08-17T16:03:37Z",
+      "side": 1,
+      "message": "This is not documented anywhere, but new UI is not passing `dhcp_options_list` when DHCP is disabled. Thats what discussed with reporter too.",
+      "parentUuid": "ccd6abc1_44aabc93",
       "revId": "5c91fea03ca305db2b836545cc0ebbc35d088b9b",
       "serverId": "c72cd27d-1743-4a55-84a4-cd13b8400c52",
       "unresolved": true

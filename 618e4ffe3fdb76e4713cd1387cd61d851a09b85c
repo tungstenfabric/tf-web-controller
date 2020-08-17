@@ -16,6 +16,24 @@
       "revId": "618e4ffe3fdb76e4713cd1387cd61d851a09b85c",
       "serverId": "c72cd27d-1743-4a55-84a4-cd13b8400c52",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf205e8d_f25008bb",
+        "filename": "webroot/config/networking/networks/ui/js/models/vnCfgModel.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 743,
+      "author": {
+        "id": 997
+      },
+      "writtenOn": "2020-08-17T16:03:37Z",
+      "side": 1,
+      "message": "As per the discussion with the reporter, it was confirmed that we should not sent dhcp_options_list when it is disabled and same as been updated in the ticket: https://contrail-jws.atlassian.net/browse/CEM-15847",
+      "parentUuid": "ae464b25_6175c22b",
+      "revId": "618e4ffe3fdb76e4713cd1387cd61d851a09b85c",
+      "serverId": "c72cd27d-1743-4a55-84a4-cd13b8400c52",
+      "unresolved": true
     }
   ]
 }
