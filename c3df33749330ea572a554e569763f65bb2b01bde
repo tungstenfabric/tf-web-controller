@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "42f32882_d8683ed1",
+        "filename": "webroot/config/networking/networks/ui/js/models/vnCfgModel.js",
+        "patchSetId": 18
+      },
+      "lineNbr": 625,
+      "author": {
+        "id": 302
+      },
+      "writtenOn": "2020-08-17T18:06:10Z",
+      "side": 1,
+      "message": "ES6+ syntax isn\u0027t supported. Please correct the usage of default parameter",
+      "revId": "c3df33749330ea572a554e569763f65bb2b01bde",
+      "serverId": "c72cd27d-1743-4a55-84a4-cd13b8400c52",
+      "unresolved": true
+    }
+  ]
+}
