@@ -117,28 +117,29 @@ define([
                 }
                 //Externel Network
                 var extNetworkUUID = newLRData.extNetworkUUID
-                if(newLRData.elementConfigMap && extNetworkUUID != "" &&
-                   extNetworkUUID != "None") {
-                   newLRData["virtual_network_refs"] = [];
-                    var extNetworkUUIDData =
-                        newLRData.elementConfigMap.extNetworkUUID.data;
-                    var extNetworkUUIDDataLen = extNetworkUUIDData.length;
-                    for(var i = 0; i < extNetworkUUIDDataLen; i++) {
-                        if(extNetworkUUIDData[i].value == extNetworkUUID) {
-                            newLRData["virtual_network_refs"][0] = {};
-                            var obj = {};
-                            obj.to = extNetworkUUIDData[i].fqname.split(":");
-                            obj.uuid = extNetworkUUIDData[i].value;
-                            //Set attr type as ExternalGateway
-                            obj.attr = {
-                                "logical_router_virtual_network_type" : "ExternalGateway"
-                            };
-                            newLRData["virtual_network_refs"][0] = obj;
-                            break;
+                if(newLRData.elementConfigMap && extNetworkUUID != "") {
+                    newLRData["virtual_network_refs"] = [];
+                    if (extNetworkUUID != "None") {
+                        var extNetworkUUIDData =
+                            newLRData.elementConfigMap.extNetworkUUID.data;
+                        var extNetworkUUIDDataLen = extNetworkUUIDData.length;
+                        for(var i = 0; i < extNetworkUUIDDataLen; i++) {
+                            if(extNetworkUUIDData[i].value == extNetworkUUID) {
+                                newLRData["virtual_network_refs"][0] = {};
+                                var obj = {};
+                                obj.to = extNetworkUUIDData[i].fqname.split(":");
+                                obj.uuid = extNetworkUUIDData[i].value;
+                                //Set attr type as ExternalGateway
+                                obj.attr = {
+                                    "logical_router_virtual_network_type" : "ExternalGateway"
+                                };
+                                newLRData["virtual_network_refs"][0] = obj;
+                                break;
+                            }
                         }
                     }
+                    
                 }
-
                 //extend to physical router
                 newLRData["physical_router_refs"] = [];
                 if(newLRData.user_created_physical_router !== 'none') {
