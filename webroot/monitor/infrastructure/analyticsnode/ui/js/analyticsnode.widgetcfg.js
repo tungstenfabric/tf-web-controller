@@ -388,7 +388,7 @@ define(['underscore', 'contrail-view', 'legend-view', 'monitor-infra-analyticsno
                         config: {
                             table_name: 'StatTable.NodeStatus.process_mem_cpu_usage',
                             select: 'name, T=, MAX(process_mem_cpu_usage.cpu_share)',
-                            where: 'process_mem_cpu_usage.__key = contrail-snmp-collector'
+                            where: 'process_mem_cpu_usage.__key = tf-snmp-collector'
                         }
                     },
                     viewCfg: {
