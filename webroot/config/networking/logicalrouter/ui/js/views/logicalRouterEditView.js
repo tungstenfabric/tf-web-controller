@@ -226,9 +226,10 @@ define([
                         elementConfig:{allowClear: true,
                                        dataTextField: "text",
                                        dataValueField: "value",
+                                       defaultValueId: 0,
                                        data : [
-                                         {"text":"vxlan-routing","value":"vxlan-routing"},
-                                         {"text":"snat-routing","value":"snat-routing"}]
+                                         {"text":"snat-routing","value":"snat-routing"},
+                                         {"text":"vxlan-routing","value":"vxlan-routing"}]
                                     }}
                     }]
                 },{
