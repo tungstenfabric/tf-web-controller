@@ -498,66 +498,16 @@ function removeBackRefFromPostData(logicalRouterPostData){
 
 function filterVMI(error, orginalDataFromUI, datafromAPI, callback)
 {
-    var i = 0;
-    var createVMIArray = [];
-    var deleteVMIArray = [];
-    var vmiRef_server = [];
-    var vmiRefs_serverLen = 0;
-    var vmiReffrom_ui = [];
-    var logicalRouteripPoolRefs_putLen = 0;
+    var apiRecord = (('logical-router' in datafromAPI) && datafromAPI['logical-router']['virtual_machine_interface_refs']) || [];
+    var userInput = (('logical-router' in orginalDataFromUI) && orginalDataFromUI['logical-router']['virtual_machine_interface_refs']) || [];
 
-    if ( 'logical-router' in datafromAPI &&
-         'virtual_machine_interface_refs' in datafromAPI['logical-router']) {
-        vmiRef_server = datafromAPI['logical-router']['virtual_machine_interface_refs'];
-        vmiRefs_serverLen = vmiRef_server.length;
+    var vmiRefChanges = jsonDiff.getConfigArrayDelta("virtual_machine_interface_refs", apiRecord, userInput);
+
+    if (vmiRefChanges) {
+        callback(vmiRefChanges.addedList, vmiRefChanges.deletedList);
+    } else {
+        callback([], []);
     }
-    if ( 'logical-router' in orginalDataFromUI &&
-         'virtual_machine_interface_refs' in orginalDataFromUI['logical-router']) {
-        vmiReffrom_ui = orginalDataFromUI['logical-router']['virtual_machine_interface_refs'];
-        logicalRouteripPoolRefs_putLen = vmiReffrom_ui.length;
-    }
-    if(vmiRefs_serverLen == 0) {
-        for(i = 0;i<logicalRouteripPoolRefs_putLen;i++){
-            createVMIArray.push(vmiReffrom_ui[i]);
-        }
-        callback(createVMIArray,deleteVMIArray);
-        return;
-    }
-    if(logicalRouteripPoolRefs_putLen == 0) {
-        for(i = 0;i<vmiRefs_serverLen;i++){
-            deleteVMIArray.push(vmiRef_server[i]);
-        }
-        callback(createVMIArray,deleteVMIArray);
-        return;
-    }
-    var j = 0;
-    var create = true;
-    for(i=0; i<logicalRouteripPoolRefs_putLen ;i++){
-        create = true;
-        for(j=0; j<vmiRefs_serverLen && i >= 0;j++){
-            var portlogicalRouterip_fqname = JSON.stringify(vmiReffrom_ui[i]["uuid"]);
-            var vmilogicalRouterip_fqname = JSON.stringify(vmiRef_server[j]["uuid"]);
-            if( portlogicalRouterip_fqname == vmilogicalRouterip_fqname){
-                vmiReffrom_ui.splice(i,1);
-                vmiRef_server.splice(j,1);
-                create = false;
-                i--;
-                j--;
-                logicalRouteripPoolRefs_putLen = vmiReffrom_ui.length;
-                vmiRefs_serverLen = vmiRef_server.length;
-            }
-        }
-        if(create == true) {
-            createVMIArray.push(vmiReffrom_ui[i]);
-            vmiReffrom_ui.splice(i,1);
-            i--;
-            logicalRouteripPoolRefs_putLen = vmiReffrom_ui.length;
-        }
-    }
-    for(j=0; j<vmiRefs_serverLen;j++){
-        deleteVMIArray.push(vmiRef_server[j]);
-    }
-    callback(createVMIArray,deleteVMIArray);
 }
 
 

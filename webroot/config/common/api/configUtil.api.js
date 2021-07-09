@@ -401,8 +401,7 @@ function getResTypeByFieldName (fieldName)
     var key = null;
     if (backRefStr == fieldName.substr(fieldName.length - backRefStrLen, backRefStrLen)) {
         key = fieldName.substr(0, fieldName.length - backRefStrLen);
-    }
-    if (refStr == fieldName.substr(fieldName.length - refStrLen, refStrLen)) {
+    } else if (refStr == fieldName.substr(fieldName.length - refStrLen, refStrLen)) {
         key = fieldName.substr(0, fieldName.length - refStrLen);
     }
     if (null != key) {
