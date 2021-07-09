@@ -204,6 +204,16 @@ var configJsonModifyObj = {
                 'comparators': ['uuid']
             }
         },
+        'virtual_machine_interface_refs': {
+            'preProcessCB': {
+                'comparators': ['uuid']
+            }
+        },
+        'logical_router_back_refs': {
+            'preProcessCB': {
+                'comparators': ['uuid']
+            }
+        },
     },
     'configDelete': {
         'virtual-machine-interface': {
