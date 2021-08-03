@@ -41,12 +41,16 @@ define([
         validations: {
             allowedAddressPairValidations: {
                 'ipPrefixVal': function(value, attr, finalObj) {
-                    if(value.trim() == ""){
+                    var trimmedValue = value.trim();
+                    if(trimmedValue == ""){
                         return "Enter IP Address in Allowed address pairs";
                     }
-                    if (!isValidIP(value.trim())) {
+                    if (!isValidIP(trimmedValue)) {
                         return "Enter valid IP Address in Allowed address pairs";
                     }
+		    if(trimmedValue.substr(trimmedValue.indexOf("/")+1) != 32){
+			return "IP Mask should be 32";
+		    }
                 },
                 'mac': function(value, attr, finalObj) {
                     if(value != "" && typeof value == "string" &&
