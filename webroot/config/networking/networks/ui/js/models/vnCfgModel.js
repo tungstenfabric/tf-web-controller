@@ -749,9 +749,6 @@ define([
                     this.setDHCPOptionList(subnet, []);
                 } else if (!(subnet.user_created_enable_dns)) {
                     var disabledDNS = [{'dhcp_option_name': '6', 'dhcp_option_value' : '0.0.0.0'}];
-                    if(subnet.default_gateway) {
-                        disabledDNS[0].dhcp_option_value = subnet.default_gateway;
-                    }
                     this.setDHCPOptionList(subnet, disabledDNS);
                 }
                 if (hostRoutes.length) {
