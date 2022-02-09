@@ -469,12 +469,11 @@ define([
                         return true;
                     });
                     subnetObj['allocation_pools'] = allocPoolStr.trim();
-                    subnetObj['user_created_enable_gateway'] =
-                        getValueByJsonPath(ip_block, 'default_gateway', "");
-                    subnetObj['user_created_enable_gateway'] =
-                        subnetObj['user_created_enable_gateway'].length &&
-                        subnetObj['user_created_enable_gateway'].indexOf("0.0.0.0")
-                                    == -1 ? true : false;
+                    var gatewayAddress= getValueByJsonPath(ip_block, 'default_gateway', "");
+		    if(gatewayAddress.length){
+			gatewayAddress = gatewayAddress == "0.0.0.0" || gatewayAddress == "::" ? false : true;
+		    }
+		    subnetObj['user_created_enable_gateway'] = gatewayAddress;
                     subnetObj['user_created_enable_dns']  = this.getSubnetDNSStatus(ip_block);
                     subnetObj['disable'] = true;
                     returnArr.push(subnetObj);
