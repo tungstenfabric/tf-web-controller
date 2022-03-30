@@ -12,16 +12,16 @@ define(['lodash', 'contrail-view', 'monitor-infra-controlnode-model', 'node-colo
                 type: "controlNode",
                 source:'STATTABLE',
                 config: {
-                    table_name: 'StatTable.PeerStatsData.tx_update_stats',
-                    select: 'T=, Source, SUM(tx_update_stats.reach), SUM(tx_update_stats.unreach)'
+                    table_name: 'StatTable.PeerStatsData.raw_tx_update_stats',
+                    select: 'T=, Source, SUM(raw_tx_update_stats.reach), SUM(raw_tx_update_stats.unreach)'
                 }
             },
             'CONTROLNODE_RECEIVED_UPDATES_MODEL': {
                 type: "controlNode",
                 source:'STATTABLE',
                 config: {
-                    table_name: 'StatTable.PeerStatsData.rx_update_stats',
-                    select: 'T=, Source, SUM(rx_update_stats.reach), SUM(rx_update_stats.unreach)'
+                    table_name: 'StatTable.PeerStatsData.raw_rx_update_stats',
+                    select: 'T=, Source, SUM(raw_rx_update_stats.reach), SUM(raw_rx_update_stats.unreach)'
                 }
             },
             'CONTROLNODE_SYSTEM_CPU_SHARE_MODEL': {
