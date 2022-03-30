@@ -25,12 +25,12 @@ define(['lodash', 'contrail-view', 'monitor-infra-controlnode-model', 'node-colo
                             xAxisLabel: '',
                             yAxisLabel: 'Updates sent per Control Node',
                             groupBy: 'Source',
-                            yField: 'SUM(tx_update_stats.reach)',
+                            yField: 'SUM(raw_tx_update_stats.reach)',
                             failureLabel:'Unreach Updates (Total)',
                             failureColor: '#ECECEC',
                             substractFailures: false,
                             failureCheckFn: function (d) {
-                                return ifNull(d['SUM(tx_update_stats.unreach)'],0);
+                                return ifNull(d['SUM(raw_tx_update_stats.unreach)'],0);
                             },
                         }
                     }
@@ -55,12 +55,12 @@ define(['lodash', 'contrail-view', 'monitor-infra-controlnode-model', 'node-colo
                             subTitle:"BGP, XMPP Reach/Unreach Route Updates (in 3 mins)",
                             title: ctwl.CONTROLNODE_SUMMARY_TITLE,
                             groupBy: 'Source',
-                            yField: 'SUM(rx_update_stats.reach)',
+                            yField: 'SUM(raw_rx_update_stats.reach)',
                             failureLabel:'Unreach Updates (Total)',
                             failureColor: '#ECECEC',
                             substractFailures: false,
                             failureCheckFn: function (d) {
-                                return ifNull(d['SUM(rx_update_stats.unreach)'],0);
+                                return ifNull(d['SUM(raw_rx_update_stats.unreach)'],0);
                             },
                             defaultZeroLineDisplay: true
                         }
