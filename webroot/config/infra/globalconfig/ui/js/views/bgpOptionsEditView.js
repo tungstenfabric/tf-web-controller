@@ -137,7 +137,7 @@ define([
                                 view: "FormCheckboxView",
                                 viewConfig : {
                                     path : 'graceful_restart_enable',
-                                    class : "col-xs-4",
+                                    class : "col-xs-6",
                                     label:'Graceful Restart',
                                     templateId: cowc.TMPL_CHECKBOX_LABEL_RIGHT_VIEW,
                                     dataBindValue : 'graceful_restart_enable',
@@ -145,7 +145,18 @@ define([
                                         isChecked:false
                                     }
                                 }
-                            }
+                            },
+                            {
+                                elementId: 'route_replication_threshold',
+                                view: 'FormInputView',
+                                viewConfig: {
+                                    path: 'route_replication_threshold',
+                                    dataBindValue: 'route_replication_threshold',
+                                    class: 'col-xs-6',
+                                    label: 'Route Replication Threshold',
+                                    placeholder: '0 - 60 minutes'
+                                }
+                            },
                         ]
                     },
                     {

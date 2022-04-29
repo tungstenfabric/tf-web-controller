@@ -630,6 +630,7 @@ define([
             {"key": "graceful_restart_parameters", "name": "Graceful Restart"},
             {"key": "bgpaas_parameters", "name": "BGP as a Service Port Range (Start Port - End Port)"},
             {"key": "bgp_always_compare_med", "name": "Always Compare MED"},
+            {"key": "route_replication_threshold", "name": "Route Replication Threshold"},
         ];
         this.GLOBAL_BGP_OPTIONS_SECTION_ID = "global-bgp-options-section";
         this.GLOBAL_BGP_OPTIONS_ID = "global-bgp-options";
