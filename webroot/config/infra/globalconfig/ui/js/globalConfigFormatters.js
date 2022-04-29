@@ -41,6 +41,13 @@
                         return val.port_start + ' - ' + val.port_end;
                     }
                 }
+		if('route_replication_threshold' === rowData['key']) {
+		    if ((undefined === val) || (null === val) || ({} === val)) {
+			return '-';
+		    } else {
+			return val;
+		    }
+		}
                 if ('flow_export_rate' == rowData['key']) {
                     if ((undefined === val) || (null === val) || ("" === val)) {
                         return "-";
@@ -309,4 +316,3 @@
      };
      return globalConfigFormatters;
  });
-

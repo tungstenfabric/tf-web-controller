@@ -28,7 +28,8 @@ define([
                 "port_end": 50512
             },
             "bgp_always_compare_med": false,
-            "user_created_bgpaas_parameters": "50000 - 50512"
+            "user_created_bgpaas_parameters": "50000 - 50512",
+            "route_replication_threshold": "0"
         },
         validations: {
             bgpOptionsValidations: {
@@ -54,6 +55,12 @@ define([
                                " or equal to End Port";
                        }
                    }
+                },
+                'route_replication_threshold': function(value, attr, finalObj) {
+                    var rpt = Number(value);
+                    if (isNaN(rpt) || rpt > 60 || rpt < 0) {
+                        return "Enter Route Replication Threshold number between 0 - 60";
+                    }
                 },
                 "graceful_restart_parameters.restart_time":
                 function(value, attr, finalObj) {
@@ -197,6 +204,8 @@ define([
                     newBGPOptionsConfig['bgp_always_compare_med'];
                 globalSysConfigData['global-system-config']['autonomous_system'] =
                     Number(newBGPOptionsConfig['autonomous_system']);
+                globalSysConfigData['global-system-config']['route_replication_threshold'] =
+                    Number(newBGPOptionsConfig['route_replication_threshold']);
 
                 //bgp as a service parameters
                 var bgpaasPorts = getValueByJsonPath(newBGPOptionsConfig,
